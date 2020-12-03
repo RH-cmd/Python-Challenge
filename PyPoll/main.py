@@ -14,7 +14,7 @@ percentage_of_votes = []
 total_number_of_votes = 0
 
 #Open election_data as a csv file
-with open(election_data, newline = "") as csvfile
+with open(election_data, newline = "") as csvfile:
     csvreader = csv.reader(csvfile, delimiter = ",")
 
 #Read the header row first
@@ -27,7 +27,7 @@ with open(election_data, newline = "") as csvfile
         total_number_of_votes += 1
 
         #Complete list of canidates who recieved votes by adding names to our list as they occur as well their vote count
-        if row[2] not in candidate_names
+        if row[2] not in candidate_names:
             candidate_names.append(row[2])
             index = candidate_names.index(row[2])
             number_of_votes.append(1)
