@@ -6,60 +6,58 @@ import csv
 election_data = os.path.join("Resources", "election_data.csv")
 
 #Create lists to hold data for candidate names, number of votes for each candidate, and total percentage of votes for each candidate
-candidate_names = []
-number_of_votes = []
-percentage_of_votes = []
+candidate_to_num_votes = {}
 
-#Set counter for the total number of votes
+#Set counter for the total number of votes cast
 total_number_of_votes = 0
 
 #Open election_data as a csv file
 with open(election_data) as csvfile:
-    csvreader = csv.reader(csvfile, delimiter = ",")
+    csvreader = csv.reader(csvfile, delimiter=",")
 
 #Read the header row first
     csv_header = next(csvfile)
 
     #Loop through each row 
     for row in csvreader:
+        candidate = row[2]
 
         #Add votes to the counter
         total_number_of_votes += 1
 
-        #Complete list of canidates who recieved votes by adding names to our list as they occur as well their vote count
-        if row[2] not in candidate_names:
-            candidate_names.append(row[2])
-            index = candidate_names.index(row[2])
-            number_of_votes.append(1)
-        
-        else:
-            index = candidate_names.index(row[2])
-            number_of_votes[index] += 1
+        #Populate the variable candidate to num votes
+        if candidate not in candidate_to_num_votes:
+            candidate_to_num_votes[candidate] = 0
+        candidate_to_num_votes[candidate] += 1
 
-        #Calculate the percentage of votes each candidate won and format to 3 decimal place for percentage
-        for votes in number_of_votes:
-            percentage = (round(votes/total_number_of_votes) * 100)
-            percentage = "{:.3%}".format(percentage)
-            percentage_of_votes.append(percentage)
+#Calculate the winner
+winner = ""
+winner_votes = 0
 
-        #Calculate the winner of the election based on popular vote
-        top_candidate = max(number_of_votes)
-        index = number_of_votes.index(top_candidate)
-        election_winner = candidate_names[index]
+#Print election results 
+print("Election Results")
+print("-------------------------")
+print(f"Total Votes: {str(total_number_of_votes)}")
+print("-------------------------")
+for candidate in candidate_to_num_votes:
+    num_votes = candidate_to_num_votes[candidate]
+    if num_votes > winner_votes:
+        winner_votes = num_votes
+        winner = candidate
+    percentage_votes = num_votes/total_number_of_votes
+    percentage_votes = "{:.3%}".format(percentage_votes)
+    print(f"{candidate}: {num_votes}: {percentage_votes}")
+print("--------------------------")
+print(f"Winner: {winner}")
+print("--------------------------")
 
-        #Print election results 
-        print("Election Results")
-        print("-------------------------")
-        print(f"Total Votes: {str(total_number_of_votes)}")
-        print("-------------------------")
-        for i in range(len(candidate_names)):
-            print(f"{candidate_names[i]}: {str(percentage_of_votes[i])} ({str(number_of_votes[i])})")
-        print("--------------------------")
-        print(f"Winner: {election_winner}")
-        print("--------------------------")
+# #Export results to a text file 
+# output = open("Analysis/output.txt", "w")
+# output.write("hello")
+# output.close()
 
-        #Export results to a text file 
-        output = open("output.txt", "w")
+
+
 
         
     
