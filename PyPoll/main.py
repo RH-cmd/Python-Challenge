@@ -36,5 +36,10 @@ with open(election_data, newline = "") as csvfile
             index = candidate_names.index(row[2])
             number_of_votes[index] += 1
 
-        #Calculate the percentage of votes each candidate won
-    
+        #Calculate the percentage of votes each candidate won and format to 3 decimal place for percentage
+        for votes in number_of_votes:
+            percentage = (round(votes/total_number_of_votes) * 100)
+            percentage = "{:.3%}".format(percentage)
+            percentage_of_votes.append(percentage)
+
+        
