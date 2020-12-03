@@ -14,7 +14,7 @@ percentage_of_votes = []
 total_number_of_votes = 0
 
 #Open election_data as a csv file
-with open(election_data, newline = "") as csvfile:
+with open(election_data) as csvfile:
     csvreader = csv.reader(csvfile, delimiter = ",")
 
 #Read the header row first
@@ -41,5 +41,27 @@ with open(election_data, newline = "") as csvfile:
             percentage = (round(votes/total_number_of_votes) * 100)
             percentage = "{:.3%}".format(percentage)
             percentage_of_votes.append(percentage)
+
+        #Calculate the winner of the election based on popular vote
+        top_candidate = max(number_of_votes)
+        index = number_of_votes.index(top_candidate)
+        election_winner = candidate_names[index]
+
+        #Print election results 
+        print("Election Results")
+        print("-------------------------")
+        print(f"Total Votes: {str(total_number_of_votes)}")
+        print("-------------------------")
+        for i in range(len(candidate_names)):
+            print(f"{candidate_names[i]}: {str(percentage_of_votes[i])} ({str(number_of_votes[i])})")
+        print("--------------------------")
+        print(f"Winner: {election_winner}")
+        print("--------------------------")
+
+        #Export results to a text file 
+        output = open("output.txt", "w")
+
+        
+    
 
         
