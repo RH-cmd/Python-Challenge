@@ -5,7 +5,7 @@ import csv
 #Set path for file
 election_data = os.path.join("Resources", "election_data.csv")
 
-#Create lists to hold data for candidate names, number of votes for each candidate, and total percentage of votes for each candidate
+#Create a dictionary to hold the candidate names and the number of votes counted for each of them
 candidate_to_num_votes = {}
 
 #Set counter for the total number of votes cast
