@@ -51,10 +51,25 @@ print("--------------------------")
 print(f"Winner: {winner}")
 print("--------------------------")
 
-# #Export results to a text file 
-# output = open("Analysis/output.txt", "w")
-# output.write("hello")
-# output.close()
+#Export/write results to a text file in the Analysis folder
+output = open(f"Analysis/output.txt", "w")
+output.write("Election Results")
+output.write("\n")
+output.write(f"-------------------------")
+output.write("\n")
+output.write(f"Total Votes: {str(total_number_of_votes)}")
+output.write("\n")
+output.write(f"-------------------------")
+output.write("\n")
+output.write(f"{str(candidate_to_num_votes)}")
+output.write("\n")
+output.write("-------------------------")
+output.write("\n")
+output.write(f"Winner: {str(winner)}")
+output.write("\n")
+output.write("-------------------------")
+output.write("\n")
+output.close()
 
 
 
