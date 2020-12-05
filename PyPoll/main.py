@@ -52,7 +52,7 @@ print(f"Winner: {winner}")
 print("--------------------------")
 
 #Export/write results to a text file in the Analysis folder
-output = open(f"Analysis/output.txt", "w")
+output = open(f"Analysis/analysis_output.txt", "w")
 output.write("Election Results")
 output.write("\n")
 output.write(f"-------------------------")
@@ -61,8 +61,14 @@ output.write(f"Total Votes: {str(total_number_of_votes)}")
 output.write("\n")
 output.write(f"-------------------------")
 output.write("\n")
-output.write(f"{str(candidate_to_num_votes)}")
-output.write("\n")
+for candidate in candidate_to_num_votes:
+    num_votes = candidate_to_num_votes[candidate]
+    if num_votes > winner_votes:
+        winner_votes = num_votes
+        winner = candidate
+    percentage_votes = num_votes/total_number_of_votes
+    percentage_votes = "{:.3%}".format(percentage_votes)
+    output.write(f"{candidate}: {num_votes}: {percentage_votes}\n")
 output.write("-------------------------")
 output.write("\n")
 output.write(f"Winner: {str(winner)}")
