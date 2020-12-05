@@ -49,7 +49,21 @@ print(f"Average Change: {round(sum(monthly_profit_loss_change)/len(monthly_profi
 print(f"Greatest Increase in Profits: {total_months[greatest_increase_month]} (${(str(greatest_increase_amount))})")
 print(f"Greatest Decrease in Profits: {total_months[greatest_decrease_month]} (${(str(greatest_decrease_amount))})")
 
-
-
-
-       
+#Exporting results to a text file
+output = open(f"Analysis/budget_output.txt", "w")
+    
+# Write methods to print to Financial_Analysis_Summary 
+output.write("Financial Analysis")
+output.write("\n")
+output.write("----------------------------")
+output.write("\n")
+output.write(f"Total Months: {len(total_months)}")
+output.write("\n")
+output.write(f"Total: ${sum(net_profit_and_loss)}")
+output.write("\n")
+output.write(f"Average Change: {round(sum(monthly_profit_loss_change)/len(monthly_profit_loss_change),2)}")
+output.write("\n")
+output.write(f"Greatest Increase in Profits: {total_months[greatest_increase_month]} (${(str(greatest_increase_amount))})")
+output.write("\n")
+output.write(f"Greatest Decrease in Profits: {total_months[greatest_decrease_month]} (${(str(greatest_decrease_amount))})")
+output.close()
